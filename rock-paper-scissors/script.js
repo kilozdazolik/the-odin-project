@@ -29,10 +29,14 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function handleButtonClick(playerSelection) {
-  const p = document.createElement("p");
+  let p = div.querySelector("p"); // Get the existing <p> element in the div
+  if (!p) {
+    p = document.createElement("p"); // Create a new <p> element if it doesn't exist
+    div.appendChild(p);
+  }
+
   let result = playRound(playerSelection, getComputerChoice());
   p.textContent = result;
-  div.appendChild(p);
 
   if (result.includes("won")) {
     updateScore("player");
@@ -58,7 +62,6 @@ function checkGameEnd() {
 }
 
 function endGame() {
-  div.appendChild(document.createElement("hr"));
   if (pScore === 5) {
     div.appendChild(document.createTextNode("Player wins the game!"));
   } else {
