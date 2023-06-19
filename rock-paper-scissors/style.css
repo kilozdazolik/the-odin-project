@@ -11,7 +11,7 @@ body {
   margin: 0 auto;
 }
 
-.title {
+header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +25,7 @@ body {
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   margin-bottom: 5rem;
+  padding: 2rem;
 }
 
 h2 {
@@ -32,24 +33,47 @@ h2 {
   text-align: center;
 }
 
+.player-chosen,
+.computer-chosen {
+  font-size: 4rem;
+  text-align: center;
+}
+
+#player-score,
+#computer-score {
+  font-size: 3rem;
+  text-align: center;
+}
+
 #rock,
 #paper,
 #scissors {
-  font-size: 2rem;
-  padding: 2rem 3rem;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
 }
 
-.footer {
+footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
 }
 
-section button,
+footer button,
 #div {
   grid-column: 1 / -1;
 }
 
 #new-game {
-  display: block;
+  display: none;
+}
+
+.buttons {
+  align-self: center;
+  grid-column: 1 / -1;
+  margin-bottom: 1rem;
+}
+
+#div {
+  text-align: center;
+  margin-bottom: 1rem;
 }

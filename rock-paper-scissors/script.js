@@ -4,6 +4,8 @@ const btnScissors = document.querySelector("#scissors");
 const btnNewGame = document.querySelector("#new-game");
 const playerScore = document.querySelector("#player-score");
 const computerScore = document.querySelector("#computer-score");
+const playerChosen = document.querySelector(".player-chosen");
+const computerChosen = document.querySelector(".computer-chosen");
 const div = document.querySelector("#div");
 
 const choices = ["rock", "paper", "scissors"];
@@ -35,15 +37,23 @@ function handleButtonClick(playerSelection) {
     div.appendChild(p);
   }
 
-  let result = playRound(playerSelection, getComputerChoice());
+  // Generate the computer's choice and play the round
+  let computerSelection = getComputerChoice();
+  let result = playRound(playerSelection, computerSelection);
   p.textContent = result;
 
+  // Update scores based on the round result
   if (result.includes("won")) {
     updateScore("player");
   } else if (result.includes("lose")) {
     updateScore("computer");
   }
 
+  // Update the chosen options for player and computer
+  playerChosen.textContent = playerSelection;
+  computerChosen.textContent = computerSelection;
+
+  // Check if the game has ended
   if (checkGameEnd()) {
     endGame();
   }
@@ -101,6 +111,8 @@ btnNewGame.addEventListener("click", function () {
   cScore = 0;
   playerScore.textContent = pScore;
   computerScore.textContent = cScore;
+  playerChosen.textContent = "";
+  computerChosen.textContent = "";
   div.innerHTML = "";
   btnNewGame.style.display = "none";
 });
