@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch a Sketch</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Etch a Sketch</h1>
+
+        <div class="buttons">
+          <div class="slider">
+            <label for="size">Grid Size</label>
+            <input type="range" id="size" name="size" min="2" max="100" />
+            <label for="size" id="range-value">16</label>
+          </div>
+
+          <div>
+            <input
+              type="color"
+              id="color-picker"
+              name="color-picker"
+              value="#00FFFF"
+            />
+            <label for="color-picker">Color</label>
+          </div>
+
+          <div>
+            <button id="rainbow">Rainbow</button>
+          </div>
+
+          <div>
+            <button id="reset">Reset</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="canvas"></section>
+      <footer></footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
