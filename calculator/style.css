@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.calculator {
+  min-width: 20rem;
+  min-height: 30rem;
+  padding: 1rem;
+  background-color: red;
+
+  display: grid;
+  justify-content: center;
+}
+
+.first-row {
+  padding: 2rem 10rem;
+  margin-bottom: 1rem;
+  background-color: blue;
+}
+
+.second-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
