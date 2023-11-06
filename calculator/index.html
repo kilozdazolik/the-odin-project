@@ -3,44 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator | The Odin Project</title>
+    <title>Calculator | Odin Project</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="calculator">
-      <div class="first-row">
-        <p id="display-second"></p>
-        <p id="display-first"></p>
+    <main class="container">
+      <div class="display">
+        <div class="display-previous"></div>
+        <div class="display-current"></div>
       </div>
-      <div class="second-row">
-        <button class="data-operand">Clear</button>
-        <button class="data-operand">Delete</button>
+      <div class="row">
+        <button class="data-operator" id="ALL-CLEAR">AC</button>
+        <button class="data-operator" id="CLEAR">C</button>
       </div>
-      <div class="third-row grid-4">
-        <button class="data-number">7</button>
-        <button class="data-number">8</button>
-        <button class="data-number">9</button>
-        <button class="data-number">÷</button>
+      <div class="row">
+        <button class="data-numbers" id="7">7</button>
+        <button class="data-numbers" id="8">8</button>
+        <button class="data-numbers" id="9">9</button>
+        <button class="data-operator" id="DIVIDE">÷</button>
       </div>
-      <div class="fifth-row grid-4">
-        <button class="data-number">4</button>
-        <button class="data-number">5</button>
-        <button class="data-number">6</button>
-        <button class="data-operand">x</button>
+      <div class="row">
+        <button class="data-numbers" id="4">4</button>
+        <button class="data-numbers" id="5">5</button>
+        <button class="data-numbers" id="6">6</button>
+        <button class="data-operator" id="MULTIPLY">x</button>
       </div>
-      <div class="sixth-row grid-4">
-        <button class="data-number1">1</button>
-        <button class="data-number">2</button>
-        <button class="data-number">3</button>
-        <button class="data-operand">-</button>
+      <div class="row">
+        <button class="data-numbers" id="1">1</button>
+        <button class="data-numbers" id="2">2</button>
+        <button class="data-numbers" id="3">3</button>
+        <button class="data-operator" id="SUBTRACT">-</button>
       </div>
-      <div class="seventh-row grid-4">
-        <button class="data-operand">.</button>
-        <button class="data-number">0</button>
-        <button class="data-operand">=</button>
-        <button class="data-operand">+</button>
+      <div class="row">
+        <button class="data-numbers" id="0">0</button>
+        <button class="data-operator" id="DECIMAL">.</button>
+        <button class="data-operator" id="EQUAL">=</button>
+        <button class="data-operator" id="ADD">+</button>
       </div>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>
