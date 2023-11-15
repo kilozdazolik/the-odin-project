@@ -3,7 +3,10 @@ let numbers = document.querySelectorAll(".data-numbers");
 let operators = document.querySelectorAll(".data-operator");
 let currentValue = document.querySelector(".display-current");
 let previousValue = document.querySelector(".display-previous");
-const equal = document.getElementById("EQUAL");
+let clear = document.getElementById("CLEAR");
+let allClear = document.getElementById("ALL-CLEAR");
+let decimal = document.getElementById("DECIMAL");
+let equal = document.getElementById("EQUAL");
 
 // variables
 let firstNum = "";
@@ -12,7 +15,7 @@ let operator = "";
 
 // functions that handles the math logic
 function add(a, b) {
-  return a + b;
+  return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
@@ -27,16 +30,16 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(a, b, op) {
+function calc(a, b, op) {
   switch (op) {
     case "+":
-      return add(a, b);
+      return add(b, a);
     case "-":
-      return subtract(a, b);
+      return subtract(b, a);
     case "*":
-      return multiply(a, b);
+      return multiply(b, a);
     case "/":
-      return divide(a, b);
+      return divide(b, a);
   }
 }
 
@@ -67,7 +70,24 @@ operators.forEach(function (operandor) {
   });
 });
 
+allClear.addEventListener("click", function () {
+  firstNum = "";
+  secondNum = "";
+  operator = "";
+  currentValue.textContent = firstNum;
+  previousValue.textContent = firstNum;
+});
+
 equal.addEventListener("click", function () {
+  console.log(calc(firstNum, secondNum, operator));
   previousValue.textContent = "";
-  currentValue.textContent = operate(firstNum, secondNum, operator);
+  currentValue.textContent = calc(firstNum, secondNum, operator);
+});
+
+// TODO: Fix clear button issues
+clear.addEventListener("click", function () {
+  console.log("clear clicked");
+  firstNum = firstNum.substring(0, -1);
+  console.log(firstNum);
+  currentValue.textContent = firstNum;
 });
