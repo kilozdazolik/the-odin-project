@@ -92,7 +92,7 @@ operators.forEach(function (op) {
   });
 });
 
-// Handle equal button click (similar to your previous code)
+// Handle equal button click
 equal.addEventListener("click", function () {
   if (previousVal && operator) {
     const result = calc(
@@ -120,5 +120,4 @@ TODO:
 Decimal
 Keyboard support
 Finish the styling
-Error handling when dividing by 0
 */
