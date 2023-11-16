@@ -1,93 +1,119 @@
 "use strict";
-let numbers = document.querySelectorAll(".data-numbers");
-let operators = document.querySelectorAll(".data-operator");
-let currentValue = document.querySelector(".display-current");
-let previousValue = document.querySelector(".display-previous");
-let clear = document.getElementById("CLEAR");
-let allClear = document.getElementById("ALL-CLEAR");
-let decimal = document.getElementById("DECIMAL");
-let equal = document.getElementById("EQUAL");
 
-// variables
-let firstNum = "";
-let secondNum = "";
+const numbers = document.querySelectorAll(".data-numbers");
+const operators = document.querySelectorAll(".data-operator");
+const displayPrevious = document.querySelector(".display-previous");
+const displayCurrent = document.querySelector(".display-current");
+const clear = document.querySelector(".data-c");
+const allClear = document.querySelector(".data-ac");
+const decimal = document.querySelector(".data-decimal");
+const equal = document.querySelector(".data-equal");
+
+let currentVal = "";
+let previousVal = "";
 let operator = "";
 
-// functions that handles the math logic
-function add(a, b) {
-  return Number(a) + Number(b);
+// Handle number click
+function handleNum(num) {
+  if (currentVal.length <= 12) {
+    currentVal += num;
+  }
 }
 
-function subtract(a, b) {
-  return a - b;
+// Handle operator button click
+function handleOp(op) {
+  if (previousVal && operator) {
+    // Evaluate the previous pair of numbers
+    const result = calc(
+      parseFloat(previousVal),
+      parseFloat(currentVal),
+      operator
+    );
+    previousVal = result.toString();
+    currentVal = "";
+    displayPrevious.textContent = previousVal + " " + op;
+  } else {
+    // First operator encountered
+    previousVal = currentVal;
+    currentVal = "";
+    displayPrevious.textContent = previousVal + " " + op;
+  }
+  operator = op;
 }
 
-function multiply(a, b) {
-  return a * b;
+// Handle clearing the last element of the current string
+function handleClear() {
+  currentVal = currentVal.slice(0, -1);
+  displayCurrent.textContent = currentVal;
 }
 
-function divide(a, b) {
-  return a / b;
+// Handle cleaning the display
+function handleAllClear() {
+  currentVal = "";
+  previousVal = "";
+  operator = "";
+  displayCurrent.textContent = "";
+  displayPrevious.textContent = "";
 }
 
-function calc(a, b, op) {
+// Evaluate a pair of numbers based on the operator
+function calc(num1, num2, op) {
   switch (op) {
     case "+":
-      return add(b, a);
+      return num1 + num2;
     case "-":
-      return subtract(b, a);
-    case "*":
-      return multiply(b, a);
-    case "/":
-      return divide(b, a);
+      return num1 - num2;
+    case "x":
+      return num1 * num2;
+    case "÷": //TODO: CANT DIVIDE BY 0
+      return num1 / num2;
+    default:
+      return num2; // Default to the second number
   }
-}
-
-function handleNum(num) {
-  if (firstNum.length <= 12) {
-    firstNum += num;
-  }
-}
-
-function handleOp(operandor) {
-  operator = operandor;
-  secondNum = firstNum;
-  firstNum = "";
 }
 
 numbers.forEach(function (num) {
   num.addEventListener("click", function (e) {
     handleNum(e.target.textContent);
-    currentValue.textContent = firstNum;
+    displayCurrent.textContent = currentVal;
   });
 });
 
-operators.forEach(function (operandor) {
-  operandor.addEventListener("click", function (e) {
+operators.forEach(function (op) {
+  op.addEventListener("click", function (e) {
     handleOp(e.target.textContent);
-    previousValue.textContent = secondNum + " " + operator;
-    currentValue.textContent = firstNum;
+    displayPrevious.textContent = previousVal + " " + operator;
+    displayCurrent.textContent = currentVal;
   });
+});
+
+// Handle equal button click (similar to your previous code)
+equal.addEventListener("click", function () {
+  if (previousVal && operator) {
+    const result = calc(
+      parseFloat(previousVal),
+      parseFloat(currentVal),
+      operator
+    );
+    displayPrevious.textContent = "";
+    displayCurrent.textContent = result.toString();
+    previousVal = "";
+    currentVal = result.toString();
+  }
 });
 
 allClear.addEventListener("click", function () {
-  firstNum = "";
-  secondNum = "";
-  operator = "";
-  currentValue.textContent = firstNum;
-  previousValue.textContent = firstNum;
+  handleAllClear();
 });
 
-equal.addEventListener("click", function () {
-  console.log(calc(firstNum, secondNum, operator));
-  previousValue.textContent = "";
-  currentValue.textContent = calc(firstNum, secondNum, operator);
-});
-
-// TODO: Fix clear button issues
 clear.addEventListener("click", function () {
-  console.log("clear clicked");
-  firstNum = firstNum.substring(0, -1);
-  console.log(firstNum);
-  currentValue.textContent = firstNum;
+  handleClear();
 });
+
+/* 
+TODO: 
+Decimal
+Keyboard support
+Finish the styling
+Error handling when dividing by 0
+*/
