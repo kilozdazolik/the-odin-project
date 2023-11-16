@@ -65,8 +65,13 @@ function calc(num1, num2, op) {
       return num1 - num2;
     case "x":
       return num1 * num2;
-    case "÷": //TODO: CANT DIVIDE BY 0
-      return num1 / num2;
+    case "÷":
+      if (num2 !== 0) {
+        return num1 / num2;
+      } else {
+        displayCurrent.textContent = "I can't :(";
+        return undefined;
+      }
     default:
       return num2; // Default to the second number
   }
