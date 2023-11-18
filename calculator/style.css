@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +12,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  font-family: "Gabarito", sans-serif;
+  background-color: #6f605d;
 }
 
 .container {
@@ -22,11 +26,12 @@ body {
   min-width: 20rem;
   min-height: 20rem;
   padding: 1rem;
-  background-color: red;
+  background-color: #262730;
+  border-radius: 1rem;
 }
 
 .display {
-  background-color: yellow;
+  background-color: #19382c;
   width: 100%;
   height: 5rem;
   padding: 0.35rem;
@@ -38,6 +43,8 @@ body {
   justify-content: center;
 
   font-size: 2rem;
+  color: #f6f7eb;
+  border-radius: 0.5rem;
 }
 
 .btn {
@@ -45,4 +52,24 @@ body {
   height: 5rem;
 
   font-size: 2rem;
+  background-color: #27474e;
+  color: #f6f7eb;
+  border: 2px solid #223e44;
+  border-radius: 0.5rem;
+}
+
+.btn:active {
+  background-color: #3f4150;
+  transition: all 0.2s;
+}
+
+.data-operator,
+.data-equal,
+.data-decimal {
+  background-color: #3e6f7a;
+}
+
+.data-ac,
+.data-c {
+  background-color: #4b8895;
 }
