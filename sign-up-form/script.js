@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (emailValue === "") {
       setErrorFor(email, "* Email cannot be blank!");
     } else if (!isEmail(emailValue)) {
-      setErrorFor(email, "* Email is not valid!");
+      setErrorFor(email, "* Invalid email format!");
     } else {
       setSuccessFor(email);
     }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (phoneNumberValue === "") {
       setErrorFor(phoneNumber, "* Phone number cannot be blank!");
     } else if (!isPhone(phoneNumberValue)) {
-      setErrorFor(phoneNumber, "* Phone number is not valid!");
+      setErrorFor(phoneNumber, "* Phone number must be 10 digits!");
     } else {
       setSuccessFor(phoneNumber);
     }
