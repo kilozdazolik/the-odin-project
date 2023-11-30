@@ -59,12 +59,25 @@ body {
   gap: 0.2rem;
   margin-left: 1rem;
   margin-bottom: 2rem;
+  height: 3rem;
+}
+
+.form-control.error input {
+  border-color: red;
+}
+
+.form-control.success input {
+  border-color: greenyellow;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
 }
 
 input {
   max-width: 20rem;
   padding: 0.4rem;
-
   border: solid 1px #e5e7eb;
   border-radius: 5px;
 }
@@ -74,10 +87,6 @@ input:active {
   outline: none;
   border-color: rgb(94, 174, 224);
   box-shadow: 20px 3px 19px 3px rgba(0, 0, 0, 0.1);
-}
-
-.input:invalid {
-  border-color: red;
 }
 
 .active {
