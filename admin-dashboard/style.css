@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* ICONS */
+.icon-nav,
+.card-icon {
+  width: 2cqh;
+  height: 2rem;
+}
+
+.section-main {
+  display: grid;
+  grid-template-areas:
+    "aside nav nav"
+    "aside home home"
+    "aside home home";
+  grid-template-rows: 0.2fr 1fr;
+  grid-template-columns: 0.4fr 2fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  height: 100vh;
+  margin: 0;
+}
+
+.section-nav {
+  grid-area: nav;
+}
+
+.nav__bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.section-aside {
+  grid-area: aside;
+}
+
+.section-home {
+  grid-area: home;
+}
