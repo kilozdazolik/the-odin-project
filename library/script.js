@@ -10,6 +10,15 @@ const fileInput = document.getElementById("fileInput");
 
 const myLibrary = [];
 
+// Dummy data
+myLibrary.push(
+  new Book("The Fellowship of the Ring", "J.R.R. Tolkien", 423, true, 5)
+);
+myLibrary.push(new Book("The Two Towers", "J.R.R. Tolkien", 352, true, 4));
+myLibrary.push(
+  new Book("The Return of the King", "J.R.R. Tolkien", 416, false, 0)
+);
+
 function Book(title, author, pages, read, rating) {
   this.title = title;
   this.author = author;
@@ -30,16 +39,18 @@ function addBookToLibrary(event) {
   myLibrary.push(newBook);
   console.log(myLibrary);
 
-  displayBooks(title, author, rating);
+  displayBooks();
 }
 
-function displayBooks(title, author, rating) {
-  const starIcons = Array.from({ length: 5 }, (_, index) => {
-    const fillColor =
-      index < rating
-        ? "var(--primary-color-dark)"
-        : "var(--default-color-very-light)";
-    return `
+function displayBooks() {
+  books.innerHTML = "";
+  myLibrary.forEach((book, index) => {
+    const starIcons = Array.from({ length: 5 }, (_, index) => {
+      const fillColor =
+        index < book.rating
+          ? "var(--primary-color-dark)"
+          : "var(--default-color-very-light)";
+      return `
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -53,32 +64,38 @@ function displayBooks(title, author, rating) {
           />
         </svg>
       `;
-  }).join("");
+    }).join("");
 
-  const bookHTML = `
-  <div class="book">
-            <div class="img-box">
-              <img
-                src="img/book/stevejobs.jpg"
-                alt="Picture of the book"
-                class="img-box--img"
-              />
-            </div>
-            <div class="book-text">
-              <h3 class="heading-tertiary">${title}</h3>
-              <p class="book-author">${author}</p>
-            </div>
-            ${
-              readCheckbox.checked
-                ? `<div class="book-rating">${starIcons}</div>`
-                : ""
-            }
-          </div>
+    const bookHTML = `
+      <div class="book" data-index="${index}">
+        <div class="img-box">
+          <img
+            src="img/book/default.jpg"
+            alt="Default Picture of Book"
+            class="img-box--img"
+          />
         </div>
-  `;
+        <div class="book-text">
+          <h3 class="heading-tertiary">${book.title}</h3>
+          <p class="book-author">${book.author}</p>
+        </div>
+        ${
+          book.read
+            ? `<div class="book-rating">${starIcons}</div>`
+            : `<div class="book-rating" style="visibility:hidden">${starIcons}</div>`
+        }
+      </div>
+    `;
 
-  books.insertAdjacentHTML("beforeend", bookHTML);
+    books.insertAdjacentHTML("beforeend", bookHTML);
+  });
   console.log("added");
+}
+
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+  console.log("removed");
 }
 
 function toggleRatingVisibility() {
@@ -106,12 +123,6 @@ function getRating() {
   return clickedStars;
 }
 
-fileInput.addEventListener("change", () => {
-  leftContainer.innerHTML = `<img src="${URL.createObjectURL(
-    fileInput.files[0]
-  )}" alt="Uploaded Image" class="uploaded-img" />`;
-});
-
 readCheckbox.addEventListener("change", toggleRatingVisibility);
 
 showButton.addEventListener("click", () => {
@@ -119,3 +130,5 @@ showButton.addEventListener("click", () => {
 });
 
 confirmBtn.addEventListener("click", addBookToLibrary);
+
+displayBooks();
