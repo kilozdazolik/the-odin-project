@@ -116,13 +116,19 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
   color: var(--primary-color);
+}
+
+.uploaded-img {
+  max-width: 30rem;
+  border-radius: 8px;
+  height: auto;
 }
 
 .dialog-icon {
   width: 5rem;
   height: 5rem;
+  cursor: pointer;
 }
 
 .form-control {
@@ -168,7 +174,7 @@ body {
 }
 
 .ratings .star.clicked .rating-icon {
-  fill: green; /* Set the desired color */
+  fill: var(--primary-color-dark); /* Set the desired color */
 }
 
 .navbar__profile-btn {
