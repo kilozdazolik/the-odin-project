@@ -13,11 +13,34 @@ const myLibrary = [];
 
 // Dummy data
 myLibrary.push(
-  new Book("The Fellowship of the Ring", "J.R.R. Tolkien", 423, true, 5)
+  new Book(
+    "The Fellowship of the Ring",
+    "J.R.R. Tolkien",
+    423,
+    true,
+    5,
+    "https://musicart.xboxlive.com/7/8a8d5100-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080"
+  )
 );
-myLibrary.push(new Book("The Two Towers", "J.R.R. Tolkien", 352, true, 4));
 myLibrary.push(
-  new Book("The Return of the King", "J.R.R. Tolkien", 416, false, 0)
+  new Book(
+    "The Two Towers",
+    "J.R.R. Tolkien",
+    352,
+    true,
+    4,
+    "https://m.media-amazon.com/images/M/MV5BZGMxZTdjZmYtMmE2Ni00ZTdkLWI5NTgtNjlmMjBiNzU2MmI5XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg"
+  )
+);
+myLibrary.push(
+  new Book(
+    "The Return of the King",
+    "J.R.R. Tolkien",
+    416,
+    false,
+    0,
+    "https://musicart.xboxlive.com/7/8d8d5100-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080"
+  )
 );
 
 function Book(title, author, pages, read, rating, imgURL) {
