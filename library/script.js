@@ -1,6 +1,7 @@
 "use strict";
 
 const books = document.querySelector(".home__books");
+const book = document.querySelector(".book");
 const dialog = document.querySelector(".navbar__dialog");
 const showButton = document.getElementById("showDialog");
 const confirmBtn = document.getElementById("confirmBtn");
@@ -19,12 +20,13 @@ myLibrary.push(
   new Book("The Return of the King", "J.R.R. Tolkien", 416, false, 0)
 );
 
-function Book(title, author, pages, read, rating) {
+function Book(title, author, pages, read, rating, imgURL) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
   this.rating = rating;
+  this.imgURL = imgURL;
 }
 
 function addBookToLibrary(event) {
@@ -34,8 +36,9 @@ function addBookToLibrary(event) {
   const pages = document.getElementById("pages").value;
   const read = readCheckbox.checked;
   const rating = getRating();
+  const imgURL = document.getElementById("book-img").value;
 
-  const newBook = new Book(title, author, pages, read, rating);
+  const newBook = new Book(title, author, pages, read, rating, imgURL);
   myLibrary.push(newBook);
   console.log(myLibrary);
 
@@ -68,13 +71,14 @@ function displayBooks() {
 
     const bookHTML = `
       <div class="book" data-index="${index}">
-        <div class="img-box">
           <img
-            src="img/book/default.jpg"
-            alt="Default Picture of Book"
-            class="img-box--img"
+          src="${book.imgURL || "img/book/default.jpg"}"
+          alt="${book.title || "Default Picture of Book"}"
+            class="img"
           />
-        </div>
+          <div class="overlay">
+            <p class="overlay-text">Delete</p>
+          </div>
         <div class="book-text">
           <h3 class="heading-tertiary">${book.title}</h3>
           <p class="book-author">${book.author}</p>
@@ -130,5 +134,13 @@ showButton.addEventListener("click", () => {
 });
 
 confirmBtn.addEventListener("click", addBookToLibrary);
+
+books.addEventListener("click", (event) => {
+  const targetBook = event.target.closest(".book");
+  if (targetBook) {
+    const id = targetBook.getAttribute("data-index");
+    removeBook(id);
+  }
+});
 
 displayBooks();
