@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: 2rem;
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+}
+
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  width: 300px; /* Adjust width as needed */
+  margin: 0 auto;
+}
+
+.square {
+  width: 10rem; /* Adjust square size as needed */
+  height: 10rem; /* Adjust square size as needed */
+  border: 1px solid black;
+  box-sizing: border-box; /* Include border in square dimensions */
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
