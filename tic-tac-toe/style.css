@@ -1,4 +1,4 @@
-* {
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap") * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,6 +6,7 @@
 
 html {
   font-size: 62.5%;
+  font-family: "Noto Sans", sans-serif;
 }
 
 .main {
@@ -39,6 +40,11 @@ h1 {
   height: 10rem; /* Adjust square size as needed */
   border: 1px solid black;
   box-sizing: border-box; /* Include border in square dimensions */
+  font-size: 10rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttons {

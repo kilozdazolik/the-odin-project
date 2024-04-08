@@ -1,15 +1,35 @@
 "use strict";
 
+const startBtn = document.querySelector("#start-button");
+const restartBtn = document.querySelector("#restart-button");
+const playerInputOne = document.querySelector("#player1");
+const playerInputTwo = document.querySelector("#player2");
+const gameBoardEl = document.querySelector(".gameboard");
+const containerEl = document.querySelector(".container");
+const squareEl = document.querySelector(".square");
+
 const Gameboard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
 
   // Function to display the current board state in the console
   const render = () => {
+    gameBoardEl.innerHTML = "";
+    containerEl.innerHTML = "";
+
+    board.forEach((_, i) => {
+      const square = document.createElement("div");
+      square.className = "square";
+      square.setAttribute("data-index", i);
+      square.addEventListener("click", (e) => Game.playTurn(e));
+      gameBoardEl.insertAdjacentElement("beforeEnd", square);
+    });
+    /* CONSOLE
     for (let i = 0; i < 9; i += 3) {
       console.log(board[i] + " | " + board[i + 1] + " | " + board[i + 2]);
       if (i < 6) console.log("---------");
     }
     console.log("_________________");
+    */
   };
 
   // Function to update a specific cell on the board with a player's mark
@@ -54,30 +74,33 @@ const getPlayer = (name, mark) => {
 
 const Game = (() => {
   let currentPlayer;
-  let player1;
-  let player2;
+  let players = [];
 
   const start = () => {
     // Get players name
-    player1 = getPlayer(prompt("name"), "X");
-    player2 = getPlayer(prompt("name"), "O");
+    if (playerInputOne.value === "" || playerInputTwo.value === "") {
+      alert("Give me a name!");
+      return;
+    }
 
-    console.log(`Players selected! ${player1} vs ${player2}. Loading game...`);
+    players[0] = getPlayer(playerInputOne.value, "X");
+    players[1] = getPlayer(playerInputTwo.value, "O");
+
     Gameboard.render();
-    currentPlayer = player1;
+    currentPlayer = players[0];
+
     playTurn();
   };
 
-  const playTurn = () => {
+  const playTurn = (e) => {
     let totalMoves = 0;
 
-    const index = prompt(
-      `${currentPlayer.name}'s turn (${currentPlayer.mark}): Enter cell index (0-8):`
-    );
+    const square = e.target;
+    const index = square.getAttribute("data-index");
+
     if (index >= 0 && index < 9) {
       if (Gameboard.updateBoard(index, currentPlayer.mark)) {
-        totalMoves++;
-        Gameboard.render();
+        square.textContent = currentPlayer.mark;
 
         // Check for player win
         if (Gameboard.checkWin(currentPlayer.mark)) {
@@ -86,24 +109,23 @@ const Game = (() => {
         }
 
         // Check for draw
-        if (totalMoves === 9) {
+        if (++totalMoves === 9) {
           console.log(`It's a draw!`);
           return;
         }
 
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
         playTurn();
       } else {
         console.log("Cell already taken. Try again.");
         playTurn();
       }
-    } else {
-      console.log("Invalid input. Please enter a number between 0 and 8.");
-      playTurn();
     }
   };
 
-  return { start };
+  return { start, playTurn };
 })();
 
-Game.start();
+startBtn.addEventListener("click", function () {
+  Game.start();
+});
