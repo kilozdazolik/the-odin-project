@@ -1,15 +1,35 @@
 "use strict";
 
+const startBtn = document.querySelector("#start-button");
+const playerInputOne = document.querySelector("#player1");
+const playerInputTwo = document.querySelector("#player2");
+const gameBoardEl = document.querySelector(".gameboard");
+const containerEl = document.querySelector(".container");
+const squareEl = document.querySelector(".square");
+const messageEl = document.querySelector(".message");
+
 const Gameboard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
 
   // Function to display the current board state in the console
   const render = () => {
+    gameBoardEl.innerHTML = "";
+    containerEl.innerHTML = "";
+
+    board.forEach((_, i) => {
+      const square = document.createElement("div");
+      square.className = "square";
+      square.setAttribute("data-index", i);
+      square.addEventListener("click", (e) => Game.playTurn(e));
+      gameBoardEl.insertAdjacentElement("beforeEnd", square);
+    });
+    /* CONSOLE
     for (let i = 0; i < 9; i += 3) {
       console.log(board[i] + " | " + board[i + 1] + " | " + board[i + 2]);
       if (i < 6) console.log("---------");
     }
     console.log("_________________");
+    */
   };
 
   // Function to update a specific cell on the board with a player's mark
@@ -44,7 +64,11 @@ const Gameboard = (() => {
     return false; // No winning combination found
   };
 
-  return { render, updateBoard, checkWin };
+  const resetBoard = () => {
+    board = ["", "", "", "", "", "", "", "", ""];
+  };
+
+  return { render, updateBoard, checkWin, resetBoard };
 })();
 
 // Function to create a player object with their name and mark
@@ -54,56 +78,61 @@ const getPlayer = (name, mark) => {
 
 const Game = (() => {
   let currentPlayer;
-  let player1;
-  let player2;
+  let players = [];
 
   const start = () => {
-    // Get players name
-    player1 = getPlayer(prompt("name"), "X");
-    player2 = getPlayer(prompt("name"), "O");
+    // Reset
+    startBtn.textContent = "Restart Game";
+    Gameboard.resetBoard();
 
-    console.log(`Players selected! ${player1} vs ${player2}. Loading game...`);
+    // Get players name
+    if (playerInputOne.value === "" || playerInputTwo.value === "") {
+      alert("Give me a name!");
+      return;
+    }
+
+    players[0] = getPlayer(playerInputOne.value, "X");
+    players[1] = getPlayer(playerInputTwo.value, "O");
+
     Gameboard.render();
-    currentPlayer = player1;
+    currentPlayer = players[0];
+
     playTurn();
   };
 
-  const playTurn = () => {
+  const playTurn = (e) => {
     let totalMoves = 0;
 
-    const index = prompt(
-      `${currentPlayer.name}'s turn (${currentPlayer.mark}): Enter cell index (0-8):`
-    );
+    const square = e.target;
+    const index = square.getAttribute("data-index");
+
     if (index >= 0 && index < 9) {
       if (Gameboard.updateBoard(index, currentPlayer.mark)) {
-        totalMoves++;
-        Gameboard.render();
+        square.textContent = currentPlayer.mark;
 
         // Check for player win
         if (Gameboard.checkWin(currentPlayer.mark)) {
-          console.log(`${currentPlayer.name} wins!`);
+          messageEl.textContent = `${currentPlayer.name} wins!`;
           return;
         }
 
         // Check for draw
-        if (totalMoves === 9) {
+        if (++totalMoves === 9) {
           console.log(`It's a draw!`);
           return;
         }
 
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
         playTurn();
-      } else {
-        console.log("Cell already taken. Try again.");
-        playTurn();
+      } else if (board[i]) {
+        return;
       }
-    } else {
-      console.log("Invalid input. Please enter a number between 0 and 8.");
-      playTurn();
     }
   };
 
-  return { start };
+  return { start, playTurn };
 })();
 
-Game.start();
+startBtn.addEventListener("click", function () {
+  Game.start();
+});
