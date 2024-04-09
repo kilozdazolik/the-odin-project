@@ -1,12 +1,12 @@
 "use strict";
 
 const startBtn = document.querySelector("#start-button");
-const restartBtn = document.querySelector("#restart-button");
 const playerInputOne = document.querySelector("#player1");
 const playerInputTwo = document.querySelector("#player2");
 const gameBoardEl = document.querySelector(".gameboard");
 const containerEl = document.querySelector(".container");
 const squareEl = document.querySelector(".square");
+const messageEl = document.querySelector(".message");
 
 const Gameboard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
@@ -64,7 +64,11 @@ const Gameboard = (() => {
     return false; // No winning combination found
   };
 
-  return { render, updateBoard, checkWin };
+  const resetBoard = () => {
+    board = ["", "", "", "", "", "", "", "", ""];
+  };
+
+  return { render, updateBoard, checkWin, resetBoard };
 })();
 
 // Function to create a player object with their name and mark
@@ -77,6 +81,10 @@ const Game = (() => {
   let players = [];
 
   const start = () => {
+    // Reset
+    startBtn.textContent = "Restart Game";
+    Gameboard.resetBoard();
+
     // Get players name
     if (playerInputOne.value === "" || playerInputTwo.value === "") {
       alert("Give me a name!");
@@ -104,7 +112,7 @@ const Game = (() => {
 
         // Check for player win
         if (Gameboard.checkWin(currentPlayer.mark)) {
-          console.log(`${currentPlayer.name} wins!`);
+          messageEl.textContent = `${currentPlayer.name} wins!`;
           return;
         }
 
@@ -116,9 +124,8 @@ const Game = (() => {
 
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
         playTurn();
-      } else {
-        console.log("Cell already taken. Try again.");
-        playTurn();
+      } else if (board[i]) {
+        return;
       }
     }
   };
