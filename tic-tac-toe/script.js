@@ -112,7 +112,7 @@ const Game = (() => {
 
         // Check for player win
         if (Gameboard.checkWin(currentPlayer.mark)) {
-          messageEl.textContent = `${currentPlayer.name} wins!`;
+          messageEl.textContent = `${currentPlayer.name} (${currentPlayer.mark}) wins!`;
           return;
         }
 
