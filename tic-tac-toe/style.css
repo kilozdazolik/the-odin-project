@@ -4,9 +4,24 @@
   box-sizing: border-box;
 }
 
+/* COLORS */
+
+:root {
+  --bg-color: #424b54;
+  --primary-color: #e6aace;
+  --p1: #d6f8d6;
+  --p2: #7fc6a4;
+  --win-color: #eca400;
+}
+
 html {
   font-size: 62.5%;
   font-family: "Noto Sans", sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
 }
 
 .main {
@@ -50,4 +65,10 @@ h1 {
 .buttons {
   display: flex;
   gap: 1rem;
+}
+
+.message {
+  font-size: 3.2rem;
+  color: var(--win-color);
+  font-weight: bold;
 }
