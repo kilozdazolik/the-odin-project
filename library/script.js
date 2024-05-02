@@ -48,7 +48,7 @@ class Library {
 
   _renderBook(book) {
     const bookHTML = `
-    <div class="book" data-index="${book.id}">
+    <div class="book" data-index="${this._randomId()}">
         <img
         src="${book.imgURL || "img/book/default.jpg"}"
         alt="${book.title || "Default Picture of Book"}"
@@ -80,7 +80,14 @@ class Library {
 
   _removeBook(i) {
     this.#books.splice(i, 1);
-    this._displayBook();
+    const bookToRemove = document.querySelector(`.book[data-index="${i}"]`);
+    if (bookToRemove) {
+      bookToRemove.remove();
+    }
+  }
+
+  _randomId() {
+    return Math.random().toFixed(2) * 100;
   }
 
   _uploadDummyData() {
