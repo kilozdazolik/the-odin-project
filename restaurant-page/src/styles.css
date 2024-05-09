@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Dancing Script", cursive;
+
+  --color-primary: rgb(15, 75, 171);
+  --color-primary-light: rgb(73, 134, 231);
+  --color-primary-dark: rgb(10, 54, 126);
+
+  --color-secondary: rgb(187, 36, 36);
+  --color-secondary-light: rgb(247, 22, 22);
+  --color-secondary-dark: rgb(117, 11, 11);
+
+  --color-bg: rgb(255, 225, 0);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: var(--font-primary);
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+
+  background-color: var(--color-bg);
+  color: var(--color-primary-dark);
+}
+
+.container {
+  max-width: 86rem;
+  margin: 0 auto;
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 50%,
+    var(--color-primary-light) 100%
+  );
+
+  padding: 2rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.7fr 2fr;
+  grid-template-areas:
+    "logo nav nav"
+    "logo hero hero";
+
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  grid-area: logo;
+  background-color: white;
+  border-bottom-left-radius: 75%;
+  border-bottom-right-radius: 75%;
+
+  padding: 3rem;
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 0.5);
+
+  margin-right: 1.5rem;
+}
+
+.nav {
+  grid-area: nav;
+  button {
+    padding: 1rem;
+    width: 15rem;
+
+    background-color: var(--color-secondary-light);
+    color: white;
+
+    font-size: 2rem;
+    border-radius: 15px;
+  }
+
+  button:hover {
+    background-color: var(--color-secondary-dark);
+    cursor: pointer;
+  }
+
+  button:nth-child(1) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  button:nth-child(2) {
+    border-radius: 0;
+  }
+  button:nth-child(3) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.hero {
+  grid-area: hero;
+}
+
+.hero-imgs {
+  display: flex;
+  gap: 1rem;
+  height: 15rem;
+
+  img {
+    border-radius: 12px;
+  }
+}
+
+.hero-header {
+  font-family: var(--font-secondary);
+  color: var(--color-bg);
+  text-shadow: 2px 5px #3f3f3f;
+  font-size: 4rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+
+  border-radius: 15px;
+  padding: 2rem;
+
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-secondary-dark) 0%,
+    var(--color-secondary) 50%,
+    var(--color-secondary-light) 100%
+  );
+
+  .content-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: auto;
+      height: 20rem;
+    }
+  }
+  .content-heading {
+    font-family: var(--font-secondary);
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .content-box {
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.5rem;
+
+    .content-box-heading {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-box-list li {
+      margin-bottom: 0.5rem;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.subheading {
+  font-size: 9rem;
+  color: var(--color-primary);
+}
+
+.disclaimer {
+  width: 50rem;
+}
