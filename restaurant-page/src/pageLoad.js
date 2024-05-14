@@ -1,12 +1,8 @@
-import homePage from "./pages/homePage.js";
-import menuPage from "./pages/menuPage.js";
-import aboutPage from "./pages/aboutPage.js";
+import createHomePage from "./pages/homePage.js";
+import navBar from "./pages/navBar.js";
 
-const home = new homePage();
-const menu = new menuPage();
-const about = new aboutPage();
-
-export default function pageload() {
-  const contentDiv = document.querySelector(".content");
-  contentDiv.append(home);
+function init() {
+  createHomePage();
 }
+
+export default init;
