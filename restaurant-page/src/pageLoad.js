@@ -1,7 +1,8 @@
 import createHomePage from "./pages/homePage.js";
-import navBar from "./pages/navBar.js";
+import createNavBar from "./pages/navBar.js";
 
 function init() {
+  createNavBar();
   createHomePage();
 }
 
