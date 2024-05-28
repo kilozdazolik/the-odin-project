@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List | Odin Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <p class="logo">✅ ToDo List</p>
+    </header>
+    <div class="app">
+      <nav class="sidebar">
+        <div class="sidebar-filters">
+          <a href="#" class="sidebar-filter-link-item add">➕ Add</a>
+          <h2 class="sidebar-header">⚙️ Filters</h2>
+          <a href="#" class="sidebar-filter-link-item">📚 All</a>
+          <a href="#" class="sidebar-filter-link-item">📖 Today</a>
+          <a href="#" class="sidebar-filter-link-item">📌 Important</a>
+          <a href="#" class="sidebar-filter-link-item">📗 Completed</a>
+        </div>
+        <div class="sidebar-projects">
+          <h2 class="sidebar-header">📢 Projects</h2>
+          <div class="sidebar-project-list">
+            <a href="#" class="sidebar-filter-link-item">Project Name</a>
+            <a href="#" class="sidebar-filter-link-item">Project Name</a>
+          </div>
+        </div>
+      </nav>
+      <main class="main">
+        <h2 class="main-header">📚 All</h2>
+        <div class="main-content">
+          <h3 class="content-header">Tasks</h3>
+          <div class="content-task">
+            <p class="content-task-name">This is my task for today</p>
+            <div class="content-task-utils">
+              <p class="utils-date">2024-06-21</p>
+              <p class="utils-edit">✏️</p>
+              <p class="utils-delete">❌</p>
+              <p class="utils-info">❓</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="modal"></div>
+    <script defer src="index.js"></script>
+  </body>
+</html>
