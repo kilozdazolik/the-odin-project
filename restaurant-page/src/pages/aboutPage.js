@@ -2,6 +2,8 @@ function createAboutPage() {
   const content = document.querySelector(".content");
   const pageContent = document.createElement("div");
   pageContent.classList.add("page");
+  content.classList.add("full-width-page");
+  content.appendChild(pageContent);
 
   const headLine = document.createElement("h3");
   headLine.classList.add("content-heading");
