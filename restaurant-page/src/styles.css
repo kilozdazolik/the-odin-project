@@ -176,6 +176,10 @@ body {
   }
 }
 
+.content.full-width-page {
+  grid-template-columns: auto 1fr;
+}
+
 .subheading {
   font-size: 9rem;
   color: var(--color-primary);
