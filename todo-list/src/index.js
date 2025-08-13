@@ -5,5 +5,5 @@ taskController.addTask("bam", "", "", "", "");
 taskController.addTask("bim", "", "", "", "");
 
 taskController.viewTasks();
-//taskController.deleteTask();
+taskController.deleteTask();
 taskController.viewTasks();
