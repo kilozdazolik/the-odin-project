@@ -1,13 +1,31 @@
 .container {
-  min-width: 100vw;
+  max-width: 100vw;
   min-height: 100vh;
-  background-color: yellow;
+  background-color: var(--color-white);
+}
+
+.user-nav {
+  background-color: var(--color-white);
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 5rem;
+}
+
+.section-project {
+  max-width: 80rem;
+
+  margin: 0 auto;
 }
 
 .header {
-  background-color: greenyellow;
-
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+  margin-bottom: 3rem;
 }
