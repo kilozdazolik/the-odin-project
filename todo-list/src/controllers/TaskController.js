@@ -6,15 +6,8 @@ class TaskController {
     this.Id = 0;
   }
 
-  addTask(title, description, note, priority, dueDate) {
-    const newTask = new Task(
-      this.Id++,
-      title,
-      description,
-      note,
-      priority,
-      dueDate
-    );
+  addTask(title, description, priority, dueDate) {
+    const newTask = new Task(this.Id++, title, description, priority, dueDate);
     this.tasks.push(newTask);
     console.log("task added");
   }
@@ -31,9 +24,7 @@ class TaskController {
     console.log(`Task with ID ${id} deleted`);
   }
   //TODO: Update task
-  updateTask(newTitle, newDescription, newNOte, newPrioirty, newDueDate) {
-    
-  }
+  updateTask(newTitle, newDescription, newPrioirty, newDueDate) {}
 }
 
 export const taskController = new TaskController();
