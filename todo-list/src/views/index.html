@@ -7,100 +7,68 @@
   </head>
   <body>
     <div class="container">
-      <nav class="user-nav">
-        <div class="left-section">
-          <div class="logo">
-            <svg class="logo__icon">
-              <use xlink:href="img/sprite.svg#icon-database"></use>
-            </svg>
-            <p class="logo__text">TaskMaster</p>
-          </div>
-          <ul class="user-nav-items">
-            <li class="user-nav__item"><a href="#">My Tasks</a></li>
-            <li class="user-nav__item"><a href="#">Projects</a></li>
-          </ul>
-        </div>
-        <div class="right-section">
-          <div class="user-widgets">
-            <button class="notification__button">
-              <svg class="notification__icon">
-                <use xlink:href="img/sprite.svg#icon-bell"></use>
-              </svg>
-            </button>
-
-            <div class="user-widgets__user">
-              <img
-                src="img/avatar.jpg"
-                alt="User photo"
-                class="user-widgets__user-photo"
-              />
+      <dialog class="dialog">
+        <div class="dialog-content">
+          <h2 class="dialog-header">New project</h2>
+          <form class="dialog-form">
+            <label class="dialog-input__title" for="ptitle"
+              >Project title</label
+            >
+            <input type="text" id="ptitle" name="ptitle" />
+            <div class="dialog-buttons">
+              <button class="page__button" id="dialog-push">Create</button>
+              <button class="page__button" id="dialog-close" type="button">
+                Cancel
+              </button>
             </div>
-          </div>
+          </form>
         </div>
-      </nav>
+      </dialog>
       <section class="section-project">
         <div class="header">
-          <h1 class="page-title">My Projects</h1>
-          <button class="page__button">New Project</button>
+          <div class="header-text">
+            <h1 class="page-title">Project: Home Renovation</h1>
+            <p class="page-text">
+              Manage all tasks related to your variable project.
+            </p>
+          </div>
+          <button class="page__button">Add Task</button>
         </div>
         <div class="projects">
-          <div class="project">
-            <div class="project-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M216,72H131.31L104,44.69A15.86,15.86,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.4,15.4,0,0,0,39.38,216H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40ZM216,200H40V88H216Z"
-                ></path>
-              </svg>
-            </div>
+          <h2 class="projects-header">Tasks</h2>
+          <div class="task">
             <div class="project-details">
-              <div class="project-title">Home Renovation</div>
-              <div class="project-count">12 tasks</div>
+              <div class="project-title">Finalize arcitectural plans</div>
+              <div class="project-count">Due: July 15, 2024</div>
+            </div>
+            <div class="project-icon">
+              <svg class="task__icon">
+                <use xlink:href="img/sprite.svg#icon-circle-right"></use>
+              </svg>
             </div>
           </div>
 
-          <div class="project">
-            <div class="project-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M216,72H131.31L104,44.69A15.86,15.86,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.4,15.4,0,0,0,39.38,216H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40ZM216,200H40V88H216Z"
-                ></path>
-              </svg>
-            </div>
+          <div class="task">
             <div class="project-details">
-              <div class="project-title">Home Renovation</div>
-              <div class="project-count">12 tasks</div>
+              <div class="project-title">Finalize arcitectural plans</div>
+              <div class="project-count">Due: July 15, 2024</div>
+            </div>
+            <div class="project-icon">
+              <svg class="task__icon">
+                <use xlink:href="img/sprite.svg#icon-circle-right"></use>
+              </svg>
             </div>
           </div>
 
-          <div class="project">
-            <div class="project-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M216,72H131.31L104,44.69A15.86,15.86,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.4,15.4,0,0,0,39.38,216H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40ZM216,200H40V88H216Z"
-                ></path>
-              </svg>
-            </div>
+          <div class="task">
             <div class="project-details">
-              <div class="project-title">Home Renovation</div>
-              <div class="project-count">12 tasks</div>
+              <div class="project-title">Finalize arcitectural plans</div>
+              <div class="project-count">Due: July 15, 2024</div>
+            </div>
+            <div class="project-icon">
+              <svg class="task__icon">
+                <use xlink:href="img/sprite.svg#icon-circle-right"></use>
+              </svg>
             </div>
           </div>
         </div>

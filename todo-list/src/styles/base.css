@@ -5,6 +5,8 @@
   --color-black: rgb(49, 49, 49);
   --color-gray-light: #dddbdbb0;
   --color-gray-dark: #999;
+  --color-blue-light: #4f9bff;
+  --color-blue-light: #4285db;
 }
 
 * {

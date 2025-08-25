@@ -3,13 +3,14 @@ import { Task } from "../models/task.js";
 class TaskController {
   constructor() {
     this.tasks = [];
-    this.Id = 0;
+    this.id = 0;
   }
 
   addTask(title, description, priority, dueDate) {
-    const newTask = new Task(this.Id++, title, description, priority, dueDate);
+    const newTask = new Task(this.id++, title, description, priority, dueDate);
     this.tasks.push(newTask);
     console.log("task added");
+    return newTask;
   }
 
   //Console help
