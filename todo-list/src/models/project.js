@@ -4,4 +4,12 @@ export class Project {
     this.title = title;
     this.tasks = tasks;
   }
+
+    addTask(task) {
+    this.tasks.push(task);
+  }
+
+    removeTask(taskId) {
+    this.tasks = this.tasks.filter((t) => t.id !== taskId);
+  }
 }

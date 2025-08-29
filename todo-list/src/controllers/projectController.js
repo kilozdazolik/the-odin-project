@@ -8,8 +8,10 @@ class ProjectController {
   }
 
   addProject(title) {
-    const newProject = new Project(this.id++, title);
+    const newProject = new Project(this.id++, title, []);
     this.projects.push(newProject);
+    console.log("New project added:", newProject);
+    return newProject;
   }
 
   addTaskToProject(projectId, title, description, priority, dueDate) {
@@ -21,7 +23,34 @@ class ProjectController {
         priority,
         dueDate
       );
-      project.tasks.push(newTask);
+      project.addTask(newTask);
+    }
+  }
+
+  deleteTaskFromProject(projectId, taskId) {
+    const project = this.getProjectById(projectId);
+    if (project) {
+      project.removeTask(taskId);
+      taskController.deleteTask(taskId);
+    }
+  }
+
+  deleteProject(projectId) {
+    console.log(
+      "Before delete:",
+      this.projects.map((p) => p.id)
+    );
+    this.projects = this.projects.filter((p) => p.id !== projectId);
+    console.log(
+      "After delete:",
+      this.projects.map((p) => p.id)
+    );
+  }
+
+  editProject(projectId, newTitle) {
+    const project = this.getProjectById(projectId);
+    if (project) {
+      project.title = newTitle;
     }
   }
 

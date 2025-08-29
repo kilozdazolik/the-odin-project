@@ -1,9 +1,11 @@
+import { showNewTaskDialog } from "./dialogView.js";
+
 export const taskView = {
-  render(project) {
+  renderProject(project) {
+    console.log("renderProject kapott projekt:", project);
     const existingSection = document.querySelector(".section-project");
     if (existingSection) existingSection.remove();
 
-    // Section
     const section = document.createElement("section");
     section.classList.add("section-project");
 
@@ -41,35 +43,38 @@ export const taskView = {
     tasksHeader.textContent = "Tasks";
     projectsContainer.appendChild(tasksHeader);
 
-    // Iterate tasks
     project.tasks.forEach((task) => {
-      const taskDiv = document.createElement("div");
-      taskDiv.classList.add("task");
-
-      taskDiv.innerHTML = `
-        <div class="project-details">
-          <div class="project-title">${task.title}</div>
-          <div class="project-count">Due: ${task.dueDate || "No deadline"}</div>
-        </div>
-        <div class="project-icon">
-          <svg class="task__icon">
-            <use xlink:href="img/sprite.svg#icon-circle-right"></use>
-          </svg>
-        </div>
-      `;
-
-      projectsContainer.appendChild(taskDiv);
+      const taskEl = this.renderTask(task);
+      projectsContainer.appendChild(taskEl);
     });
 
-    // Assemble
     section.appendChild(header);
     section.appendChild(projectsContainer);
 
     const mainContainer = document.querySelector(".container") || document.body;
     mainContainer.appendChild(section);
 
-    addTaskBtn.addEventListener("click", () => {
-      console.log("Task dialog...");
-    });
+    addTaskBtn.addEventListener("click", () => showNewTaskDialog(project.id));
+  },
+
+  renderTask(task) {
+    const taskDiv = document.createElement("div");
+    taskDiv.classList.add("task");
+
+    taskDiv.innerHTML = `
+  <div class="task-details">
+    <div class="task-priority ${task.priority}"></div>
+    <div class="task-info">
+      <p class="task-title">${task.title}</p>
+      <p class="task-count">Due: ${task.dueDate || "No deadline"}</p>
+    </div>
+    </div>
+  <div class="task-icon">
+    <svg class="task__icon">
+      <use xlink:href="img/sprite.svg#icon-circle-right"></use>
+    </svg>
+  </div>
+`;
+    return taskDiv;
   },
 };

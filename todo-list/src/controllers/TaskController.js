@@ -3,13 +3,19 @@ import { Task } from "../models/task.js";
 class TaskController {
   constructor() {
     this.tasks = [];
-    this.id = 0;
+    this.Id = 0;
   }
 
-  addTask(title, description, priority, dueDate) {
-    const newTask = new Task(this.id++, title, description, priority, dueDate);
+  addTask(title, description, note, priority, dueDate) {
+    const newTask = new Task(
+      this.Id++,
+      title,
+      description,
+      note,
+      priority,
+      dueDate
+    );
     this.tasks.push(newTask);
-    console.log("task added");
     return newTask;
   }
 
@@ -18,14 +24,19 @@ class TaskController {
     console.log(this.tasks);
   }
 
-  //TODO: Delete task
-  deleteTask() {
-    const id = Number(prompt("give me id"));
-    this.tasks = this.tasks.filter((item) => item.id !== id);
-    console.log(`Task with ID ${id} deleted`);
+  deleteTask(taskId) {
+    this.tasks = this.tasks.filter((t) => t.id !== taskId);
   }
-  //TODO: Update task
-  updateTask(newTitle, newDescription, newPrioirty, newDueDate) {}
+
+  updateTask(taskId, newTitle, newDescription, newPriority, newDueDate) {
+    const task = this.tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.title = newTitle ?? task.title;
+      task.description = newDescription ?? task.description;
+      task.priority = newPriority ?? task.priority;
+      task.dueDate = newDueDate ?? task.dueDate;
+    }
+  }
 }
 
 export const taskController = new TaskController();

@@ -1,5 +1,8 @@
-const projectTitle = document.getElementById("ptitle");
-const dialog = document.querySelector(".dialog");
+import {
+  showNewProjectDialog,
+  showDeleteProjectDialog,
+  showEditProjectDialog,
+} from "./dialogView.js";
 
 export const projectView = {
   render(projects) {
@@ -16,13 +19,30 @@ export const projectView = {
     title.classList.add("page-title");
     title.textContent = "My Projects";
 
+    const projectBtnsContainer = document.createElement("div");
+    projectBtnsContainer.classList.add("page-buttons");
+
     const newProjectBtn = document.createElement("button");
     newProjectBtn.classList.add("page__button");
     newProjectBtn.id = "openDialog";
     newProjectBtn.textContent = "New Project";
 
+    const deleteProjectBtn = document.createElement("button");
+    deleteProjectBtn.classList.add("page__button");
+    deleteProjectBtn.id = "deleteProject";
+    deleteProjectBtn.textContent = "Delete Project";
+
+    const editProjectBtn = document.createElement("button");
+    editProjectBtn.classList.add("page__button");
+    editProjectBtn.id = "editProject";
+    editProjectBtn.textContent = "Edit Project";
+
+    projectBtnsContainer.appendChild(newProjectBtn);
+    projectBtnsContainer.appendChild(editProjectBtn);
+    projectBtnsContainer.appendChild(deleteProjectBtn);
+
     header.appendChild(title);
-    header.appendChild(newProjectBtn);
+    header.appendChild(projectBtnsContainer);
 
     const projectsContainer = document.createElement("div");
     projectsContainer.classList.add("projects");
@@ -57,11 +77,12 @@ export const projectView = {
     const mainContainer = document.querySelector(".container") || document.body;
     mainContainer.appendChild(section);
 
-    newProjectBtn.addEventListener("click", showProjectDialog);
+    editProjectBtn.addEventListener("click", () =>
+      showEditProjectDialog(projects)
+    );
+    newProjectBtn.addEventListener("click", showNewProjectDialog);
+    deleteProjectBtn.addEventListener("click", () =>
+      showDeleteProjectDialog(projects)
+    );
   },
 };
-
-function showProjectDialog() {
-  projectTitle.value = "";
-  dialog.showModal();
-}
