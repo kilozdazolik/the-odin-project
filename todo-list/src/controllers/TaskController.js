@@ -19,7 +19,6 @@ class TaskController {
     return newTask;
   }
 
-  //Console help
   viewTasks() {
     console.log(this.tasks);
   }
@@ -36,6 +35,10 @@ class TaskController {
       task.priority = newPriority ?? task.priority;
       task.dueDate = newDueDate ?? task.dueDate;
     }
+  }
+
+  getTaskById(id) {
+    return this.tasks.find((p) => p.id == id);
   }
 }
 

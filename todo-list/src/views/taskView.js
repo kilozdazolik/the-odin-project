@@ -1,4 +1,4 @@
-import { showNewTaskDialog } from "./dialogView.js";
+import { showNewTaskDialog, showTaskDialog } from "./dialogView.js";
 
 export const taskView = {
   renderProject(project) {
@@ -44,7 +44,8 @@ export const taskView = {
     projectsContainer.appendChild(tasksHeader);
 
     project.tasks.forEach((task) => {
-      const taskEl = this.renderTask(task);
+      // Pass project.id as second parameter
+      const taskEl = this.renderTask(task, project.id);
       projectsContainer.appendChild(taskEl);
     });
 
@@ -57,24 +58,41 @@ export const taskView = {
     addTaskBtn.addEventListener("click", () => showNewTaskDialog(project.id));
   },
 
-  renderTask(task) {
+  renderTask(task, projectId) {
     const taskDiv = document.createElement("div");
     taskDiv.classList.add("task");
 
+    taskDiv.dataset.taskId = task.id;
+    taskDiv.dataset.projectId = projectId;
+
     taskDiv.innerHTML = `
-  <div class="task-details">
-    <div class="task-priority ${task.priority}"></div>
-    <div class="task-info">
-      <p class="task-title">${task.title}</p>
-      <p class="task-count">Due: ${task.dueDate || "No deadline"}</p>
-    </div>
-    </div>
-  <div class="task-icon">
-    <svg class="task__icon">
-      <use xlink:href="img/sprite.svg#icon-circle-right"></use>
-    </svg>
-  </div>
-`;
+      <div class="task-details">
+        <div class="task-priority ${task.priority}"></div>
+        <div class="task-info">
+          <p class="task-title">${task.title}</p>
+          <p class="task-count">Due: ${task.dueDate || "No deadline"}</p>
+        </div>
+      </div>
+      <div class="task-icon">
+        <svg class="task__icon">
+          <use xlink:href="img/sprite.svg#icon-circle-right"></use>
+        </svg>
+      </div>
+    `;
+
+    taskDiv.addEventListener("click", () => {
+      const taskId = taskDiv.dataset.taskId;
+      const projectIdFromData = taskDiv.dataset.projectId;
+
+      console.log("Clicked task:", {
+        taskId: taskId,
+        projectId: projectIdFromData,
+        fullTaskObject: task,
+      });
+
+      showTaskDialog(taskId, projectIdFromData);
+    });
+
     return taskDiv;
   },
 };
