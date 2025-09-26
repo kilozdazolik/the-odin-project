@@ -267,3 +267,21 @@
   width: 2rem;
   height: 2rem;
 }
+
+.task-project {
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.clickable-task:hover {
+  background-color: var(--color-gray-light);
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 2rem;
+}

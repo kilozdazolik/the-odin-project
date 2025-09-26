@@ -187,3 +187,136 @@ export function showEditProjectDialog(projects) {
 
   dialog.showModal();
 }
+
+export function showEditTaskDialog(project) {
+  const optionsHtml = project.tasks
+    .map((task) => `<option value="${task.id}">${task.title}</option>`)
+    .join("");
+
+  dialogContent.innerHTML = `
+    <h2 class="dialog-header">Edit task</h2>
+    <form class="dialog-form">
+      <label class="dialog-input__title" for="tselect">Select task to edit</label>
+      <select id="tselect" name="tselect">
+        ${optionsHtml}
+      </select>
+      <label class="dialog-input__title" for="ttitle">Task title</label>
+      <input type="text" id="ttitle" name="ttitle" placeholder="Enter new task title" />
+      <label class="dialog-input__description" for="tdescription">Task description</label>
+      <textarea id="tdescription" name="tdescription" placeholder="Enter new description"></textarea>
+      <label class="dialog-input__priority" for="tpriority">Task priority</label>
+      <select id="tpriority" name="tpriority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <label class="dialog-input__due-date" for="tdue-date">Due date</label>
+      <input type="date" id="tdue-date" name="tdue-date" />
+      <div class="dialog-buttons">
+        <button class="page__button" id="dialog-edit-task-btn">Save</button>
+        <button class="page__button dialog-close-btn" type="button">Cancel</button>
+      </div>
+    </form>
+  `;
+
+  // Pre-fill form when task is selected
+  const selectEl = dialogContent.querySelector("#tselect");
+  const titleInput = dialogContent.querySelector("#ttitle");
+  const descriptionInput = dialogContent.querySelector("#tdescription");
+  const priorityInput = dialogContent.querySelector("#tpriority");
+  const dueDateInput = dialogContent.querySelector("#tdue-date");
+
+  const fillForm = () => {
+    const selectedTaskId = parseInt(selectEl.value, 10);
+    const selectedTask = project.tasks.find(
+      (task) => task.id === selectedTaskId
+    );
+
+    if (selectedTask) {
+      titleInput.value = selectedTask.title;
+      descriptionInput.value = selectedTask.description;
+      priorityInput.value = selectedTask.priority;
+      dueDateInput.value = selectedTask.dueDate;
+    }
+  };
+
+  // Fill form initially and on task selection change
+  if (project.tasks.length > 0) {
+    fillForm();
+  }
+  selectEl.addEventListener("change", fillForm);
+
+  dialogContent
+    .querySelector("#dialog-edit-task-btn")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      const selectedTaskId = parseInt(selectEl.value, 10);
+      const newTitle = titleInput.value.trim();
+      const newDescription = descriptionInput.value.trim();
+      const newPriority = priorityInput.value;
+      const newDueDate = dueDateInput.value;
+
+      if (!isNaN(selectedTaskId) && newTitle) {
+        projectController.updateTaskInProject(
+          project.id,
+          selectedTaskId,
+          newTitle,
+          newDescription,
+          newPriority,
+          newDueDate
+        );
+
+        const updatedProject = projectController.getProjectById(project.id);
+        taskView.renderProject(updatedProject);
+        closeDialog();
+      }
+    });
+
+  dialogContent
+    .querySelector(".dialog-close-btn")
+    .addEventListener("click", closeDialog);
+
+  dialog.showModal();
+}
+
+export function showDeleteTaskDialog(project) {
+  const optionsHtml = project.tasks
+    .map((task) => `<option value="${task.id}">${task.title}</option>`)
+    .join("");
+
+  dialogContent.innerHTML = `
+    <h2 class="dialog-header">Delete task</h2>
+    <form class="dialog-form">
+      <label class="dialog-input__title" for="dtselect">Select task to delete</label>
+      <select id="dtselect" name="dtselect">
+        ${optionsHtml}
+      </select>
+      <div class="dialog-buttons">
+        <button class="page__button" id="dialog-delete-task-btn">Delete</button>
+        <button class="page__button dialog-close-btn" type="button">Cancel</button>
+      </div>
+    </form>
+  `;
+
+  dialogContent
+    .querySelector("#dialog-delete-task-btn")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      const selectEl = dialogContent.querySelector("#dtselect");
+      const selectedTaskId = parseInt(selectEl.value, 10);
+
+      console.log("Deleting task id:", selectedTaskId, typeof selectedTaskId);
+
+      if (!isNaN(selectedTaskId)) {
+        projectController.deleteTaskFromProject(project.id, selectedTaskId);
+        const updatedProject = projectController.getProjectById(project.id);
+        taskView.renderProject(updatedProject);
+        closeDialog();
+      }
+    });
+
+  dialogContent
+    .querySelector(".dialog-close-btn")
+    .addEventListener("click", closeDialog);
+  dialog.showModal();
+}
