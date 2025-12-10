@@ -9,6 +9,8 @@ const rating = document.querySelector(".rating");
 const readCheckbox = document.getElementById("read");
 const fileInput = document.getElementById("fileInput");
 const stars = document.querySelectorAll(".star");
+const inputAuthor = document.getElementById("author");
+const inputTitle = document.getElementById("title");
 
 class Book {
   id = 0;
@@ -123,6 +125,26 @@ class Library {
     this._displayBook();
   }
 }
+
+function validateInput(input, message) {
+  const errorSpan = document.getElementById(`${input.id}-error`);
+
+  if (input.validity.valueMissing) {
+    errorSpan.textContent = message;
+    errorSpan.className = "error active";
+  } else {
+    errorSpan.textContent = "";
+    errorSpan.className = "error";
+  }
+}
+
+inputAuthor.addEventListener("input", () => {
+  validateInput(inputAuthor, "The author name must be filled!");
+});
+
+inputTitle.addEventListener("input", () => {
+  validateInput(inputTitle, "The title is required!");
+});
 
 books.addEventListener("click", (e) => {
   const targetBook = e.target.closest(".book");

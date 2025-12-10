@@ -46,11 +46,13 @@
             <div class="container__right">
               <div class="form-control">
                 <label for="title">Book Title:</label>
-                <input type="text" name="title" id="title" />
+                <input type="text" name="title" id="title" required />
+                <span class="error" id="title-error"></span>
               </div>
               <div class="form-control">
                 <label for="author">Book Author:</label>
-                <input type="text" name="author" id="author" />
+                <input type="text" name="author" id="author" required />
+                <span class="error" id="author-error"></span>
               </div>
               <div class="form-control misc">
                 <div class="form-control">
