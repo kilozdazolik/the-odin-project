@@ -1,16 +1,17 @@
 "use strict"
 
 export class Gameboard {
+     matrix = [];
+
     constructor() {
-        this.createGrid;
+        this.createGrid();
     }
 
     createGrid() {
-        const matrix = [];
         for (let i = 0; i < 10; i++) {
-            matrix[i] = [];
+            this.matrix[i] = [];    
             for (let j = 0; j < 10; j++) {
-                matrix[i][j] = 0;
+                this.matrix[i][j] = 0;
             }
         }
     }
