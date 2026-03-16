@@ -21,6 +21,7 @@ export class Gameboard {
     }
 
     checkBoundary(x, y, ship, orientation) {
+        if (x < 0 || y < 0) return false;
         return orientation === "horizontal"
             ? x + ship.length <= 10
             : y + ship.length <= 10;
@@ -43,16 +44,23 @@ export class Gameboard {
         return true;
     }
 
-    receiveAttack(x,y) {
+    receiveAttack(x, y) {
+        if (this.matrix[y][x] === "hit" || this.matrix[y][x] === "miss") return;
+
         if (this.matrix[y][x] === 0) {
             this.missedShots.push([y, x]);
-            this.matrix[y][x] = "miss"
+            this.matrix[y][x] = "miss";
             return "miss";
         }
+
         if (typeof this.matrix[y][x] === "object") {
-        this.matrix[y][x].hit();
-        this.matrix[y][x] = "hit";
+            this.matrix[y][x].hit();
+            this.matrix[y][x] = "hit";
         }
         return "hit";
+    }
+
+    allShipsSunk() {
+        return this.ships.every(ship => ship.isSunk());
     }
 }
