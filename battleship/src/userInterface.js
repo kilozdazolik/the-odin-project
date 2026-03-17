@@ -26,4 +26,23 @@ export class UserInterface {
             }
         }
     }
+
+    getCellCoordinates(event) {
+        const playerOneGrid = document.querySelector(".player-one");
+        const playerTwoGrid = document.querySelector(".player-two");
+
+        if (!playerOneGrid.contains(event.target) && !playerTwoGrid.contains(event.target)) {
+            return null;
+        }
+
+        const x = Number(event.target.dataset.x)
+        const y = Number(event.target.dataset.y)
+
+        if (isNaN(x) || isNaN(y)) {
+            return null;
+        }
+
+        return [x,y];
+    }
+
 }
