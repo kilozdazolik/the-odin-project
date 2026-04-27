@@ -73,6 +73,26 @@ test("placeShip returns true if there is no ship on the coordinates", () => {
   const result = gameboard.placeShip(1, 1, secondShip, "vertical");
     expect(result).toBe(true);
 })
+
+test("Length-3 ship occupies consecutive horizontal cells", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(3);
+
+  const result = gameboard.placeShip(2, 1, ship, "horizontal");
+
+  expect(result).toBe(true);
+  expect(gameboard.matrix[1][2]).toBe(ship);
+  expect(gameboard.matrix[1][3]).toBe(ship);
+  expect(gameboard.matrix[1][4]).toBe(ship);
+});
+
+test("Length-3 ship respects horizontal boundary", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(3);
+
+  expect(gameboard.placeShip(7, 0, ship, "horizontal")).toBe(true);
+  expect(gameboard.placeShip(8, 0, ship, "horizontal")).toBe(false);
+});
 })
 
 describe("receiveAttack tests", () => {

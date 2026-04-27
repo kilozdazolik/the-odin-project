@@ -45,4 +45,22 @@ export class UserInterface {
         return [x,y];
     }
 
+    drawShipHover(coordinates, shipLength, orientation, element) {
+        for (let i = 0; i < shipLength; i++) {
+            const x = orientation === "horizontal" ? coordinates[0] + i : coordinates[0];
+            const y = orientation === "horizontal" ? coordinates[1] : coordinates[1] + i;
+            const hoverCell = element.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+            if (hoverCell) {
+                hoverCell.classList.add("hovered");
+            }
+        }
+    }
+
+    clearShipHover(element) {
+        const hoveredCells = element.querySelectorAll(".hovered");
+        hoveredCells.forEach(cell => cell.classList.remove("hovered"));
+    }
+
+    
+
 }

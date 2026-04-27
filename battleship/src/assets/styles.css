@@ -31,6 +31,15 @@
   background-color: #4a90d9;
 }
 
+.placed-ship {
+    border: 2px solid red !important;
+    background-color: yellow !important;
+}
+
+.hovered {
+    background-color: green !important;
+}
+
 @media (max-width: 30rem) {
   .player-one,
   .player-two {
