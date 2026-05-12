@@ -22,7 +22,6 @@ playerOneGrid.addEventListener("mouseover", (event) => {
     }
 });
 
-
 playerOneGrid.addEventListener("mouseout", (event) => {
     ui.clearShipHover(event.currentTarget);
 });

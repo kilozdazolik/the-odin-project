@@ -6,6 +6,7 @@ export class Gameboard {
         this.createGrid();
         this.ships = [];
         this.missedShots = [];
+        this.hitShots = [];
     }
 
     createGrid() {
