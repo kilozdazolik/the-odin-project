@@ -60,6 +60,26 @@ export class UserInterface {
         const hoveredCells = element.querySelectorAll(".hovered");
         hoveredCells.forEach(cell => cell.classList.remove("hovered"));
     }
+    
+    placeShipOnGrid(player, coordinates, ship, orientation, element) {
+        if (coordinates) {
+        const wasPlaced = player.gameboard.placeShip(coordinates[0], coordinates[1], ship, orientation);
+
+        if (wasPlaced) {
+            for (let i = 0; i < ship.length; i++) {
+                const x = orientation === "horizontal" ? coordinates[0] + i : coordinates[0];
+                const y = orientation === "horizontal" ? coordinates[1] : coordinates[1] + i;
+                const cell = element.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+                if (cell) {
+                    cell.classList.add("placed-ship");
+                }
+            }
+            console.log("Sikerült a lerakás!");
+        } else {
+            console.log("Ide nem rakhatod!");
+        }
+    }
+    }
 
     
 

@@ -6,3 +6,9 @@ export class Player {
         this.gameboard = new Gameboard();
     }
 }
+
+export class ComputerPlayer extends Player {
+    constructor(name) {
+        super(name);
+    }
+}
