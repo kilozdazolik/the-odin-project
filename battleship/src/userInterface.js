@@ -27,6 +27,21 @@ export class UserInterface {
         }
     }
 
+    renderBoard(gameboard,element) {
+        gameboard.matrix.forEach((row, y) => {
+            row.forEach((cell, x) => {
+                const cellElement = element.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+                if (cell === "hit") {
+                    cellElement.classList.add("hit");
+                } else if (cell === "miss") {
+                    cellElement.classList.add("miss");
+                } else if (typeof cell === "object") {
+                    cellElement.classList.add("placed-ship");
+                }
+            });
+        });
+    } 
+
     getCellCoordinates(event) {
         const playerOneGrid = document.querySelector(".player-one");
         const playerTwoGrid = document.querySelector(".player-two");
@@ -74,9 +89,7 @@ export class UserInterface {
                     cell.classList.add("placed-ship");
                 }
             }
-            console.log("Sikerült a lerakás!");
         } else {
-            console.log("Ide nem rakhatod!");
         }
         return wasPlaced;
         }

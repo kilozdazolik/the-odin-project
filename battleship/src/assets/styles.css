@@ -48,6 +48,11 @@
     background-color: gray !important;
 }
 
+.info {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 @media (max-width: 30rem) {
   .player-one,
   .player-two {
