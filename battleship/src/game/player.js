@@ -1,12 +1,11 @@
 import {Gameboard} from "./gameboard.js";
+import {Ship} from "./ship.js";
 
 export class Player {
     constructor(name) {
         this.name = name;
         this.gameboard = new Gameboard();
     }
-
-
 }
 
 export class ComputerPlayer extends Player {
@@ -19,7 +18,23 @@ export class ComputerPlayer extends Player {
         while (opponent.gameboard.matrix[y][x] === "hit" || opponent.gameboard.matrix[y][x] === "miss") {
             [x, y] = this.getRandomCoordinates();
         }
-        return opponent.gameboard.receiveAttack(x, y);
+        const result = opponent.gameboard.receiveAttack(x, y);
+        return {coordinates: [x,y], result: result};
+    }
+
+    placeRandomFleet(ships) {
+        let index = 0;
+        ships.forEach(ship => {
+            while(true) {
+                const coordinates = this.getRandomCoordinates();
+                const orientation = Math.random() < 0.5 ? "horizontal" : "vertical";
+                const newShip = new Ship(ships[index].length);
+                if (this.gameboard.placeShip(coordinates[0], coordinates[1], newShip, orientation)) {
+                    index++;
+                    break;
+                }
+            }
+        });
     }
 
     getRandomCoordinates() {

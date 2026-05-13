@@ -40,6 +40,14 @@
     background-color: green !important;
 }
 
+.hit {
+    background-color: red !important;
+}
+
+.miss {
+    background-color: gray !important;
+}
+
 @media (max-width: 30rem) {
   .player-one,
   .player-two {

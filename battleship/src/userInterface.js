@@ -78,9 +78,17 @@ export class UserInterface {
         } else {
             console.log("Ide nem rakhatod!");
         }
+        return wasPlaced;
+        }
     }
+
+    drawAttackResult(coordinates, result, element) {
+        const cell = element.querySelector(`.cell[data-x="${coordinates[0]}"][data-y="${coordinates[1]}"]`);
+        if (cell) {
+            cell.classList.add(result);
+        }
     }
+}
+
 
     
-
-}
