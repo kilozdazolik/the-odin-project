@@ -20,8 +20,8 @@ export class UserInterface {
             for (let j = 0; j < 10; j++) {
                 let cell = document.createElement("div");
                 cell.classList.add("cell");
-                cell.dataset.x = i;
-                cell.dataset.y = j;
+                cell.dataset.x = j;
+                cell.dataset.y = i;
                 container.appendChild(cell);
             }
         }
@@ -89,7 +89,6 @@ export class UserInterface {
                     cell.classList.add("placed-ship");
                 }
             }
-        } else {
         }
         return wasPlaced;
         }

@@ -45,7 +45,7 @@ export class Gameboard {
         return true;
     }
 
-    receiveAttack(x, y) {
+    receiveAttack(y,x) {
         if (this.matrix[y][x] === "hit" || this.matrix[y][x] === "miss") return;
 
         if (this.matrix[y][x] === 0) {

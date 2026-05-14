@@ -33,5 +33,5 @@ test("computer turn skips already attacked cells", () => {
 
     expect(coordinateSpy).toHaveBeenCalledTimes(2)
     expect(attackSpy).toHaveBeenCalledWith(2, 3)
-    expect(result).toBe({coordinates: [2, 3], result: "miss"})
+    expect(result).toEqual({coordinates: [2, 3], result: "miss"})
 })
