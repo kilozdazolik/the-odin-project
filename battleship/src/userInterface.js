@@ -119,6 +119,16 @@ export class UserInterface {
         }
     }
 
+    drawSunkShip(ship, element) {
+        ship.coordinates.forEach(([y, x]) => {
+            const cell = element.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+            if (cell) {
+                cell.classList.remove("hit");
+                cell.classList.add("sunk");
+            }
+        });
+    }
+
     setGridVisible(grid, isVisible) {
         if (!grid) return;
         grid.style.visibility = isVisible ? "visible" : "hidden";

@@ -1,6 +1,7 @@
 export class Ship {
     #length;
     #hits = 0;
+    coordinates = [];
 
     get length() {
         return this.#length;

@@ -190,6 +190,9 @@ export class GameController {
     if (result === undefined) return;
 
     this.ui.drawAttackResult(coords, result, this.grids.playerTwo);
+    this.playerTwo.gameboard.ships.forEach(ship => {
+        if (ship.isSunk()) this.ui.drawSunkShip(ship, this.grids.playerTwo);
+    });
 
     if (this.playerTwo.gameboard.allShipsSunk()) {
       return this.endGame("You Won!");
@@ -204,6 +207,9 @@ export class GameController {
         const attackData = this.playerTwo.takeTurn(this.playerOne);
         this.ui.drawAttackResult(attackData.coordinates, attackData.result, this.grids.playerOne);
         computerResult = attackData.result;
+        this.playerOne.gameboard.ships.forEach(ship => {
+        if (ship.isSunk()) this.ui.drawSunkShip(ship, this.grids.playerOne);
+    });
 
         if (this.playerOne.gameboard.allShipsSunk()) {
           return this.endGame("You Lost!");
@@ -227,6 +233,9 @@ export class GameController {
     if (result === undefined) return;
 
     this.ui.drawAttackResult(coords, result, targetGrid);
+    defender.gameboard.ships.forEach(ship => {
+        if (ship.isSunk()) this.ui.drawSunkShip(ship, targetGrid);
+    });
 
     if (defender.gameboard.allShipsSunk()) {
       return this.endGame(`${attacker.name} won!`);

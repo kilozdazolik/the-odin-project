@@ -37,15 +37,17 @@ export class Gameboard {
         if (!this.checkBoundary(x, y, ship, orientation)) return false;
         if (!this.detectCollision(x, y, ship, orientation)) return false;
 
-        this.getCells(x, y, ship, orientation)
-            .forEach(([row, col]) => this.matrix[row][col] = ship);
+        const cells = this.getCells(x, y, ship, orientation);
+        
+        cells.forEach(([row, col]) => this.matrix[row][col] = ship);
 
+        ship.coordinates = cells; 
         this.ships.push(ship);
 
         return true;
     }
 
-    receiveAttack(y,x) {
+    receiveAttack(x,y) {
         if (this.matrix[y][x] === "hit" || this.matrix[y][x] === "miss") return;
 
         if (this.matrix[y][x] === 0) {
