@@ -48,6 +48,10 @@
     background-color: gray !important;
 }
 
+.sunk {
+    background-color: black;
+}
+
 .info {
   text-align: center;
   margin-top: 1rem;
